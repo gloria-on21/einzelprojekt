@@ -53,7 +53,6 @@ class Particle {
 }
 const ParticleCount = 100;
 const ColorPalette = [
-    ["red", "green", "blue", "orange", "purple"],
     ["#FFDFA1", "#E8B6A0", "#FFB5C7", "#D099E8", "#A8AAFF"]
 ];
 class Simulation {
