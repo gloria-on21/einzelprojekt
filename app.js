@@ -75,7 +75,9 @@ class Simulation {
     }
     Draw(ctx) {
         //hier wird der Hintergrund gezeichnet
-        ctx.fillStyle = 'black';
+        var hintergrundfarbe;
+        hintergrundfarbe = getOption();
+        ctx.fillStyle = 'yellow';
         ctx.fillRect(0, 0, this.breite, this.hoehe);
         ctx.moveTo(50, 100);
         //hier wird alles gezeichnet
@@ -112,3 +114,8 @@ if (button != null) {
     button.onclick = main;
 }
 //hier wird die Anwendung ausgeführt
+function getOption() {
+    var selectElement = document.querySelector('#select1');
+    const hintergrundfarbe = selectElement.options[selectElement.selectedIndex].value;
+    return hintergrundfarbe;
+}

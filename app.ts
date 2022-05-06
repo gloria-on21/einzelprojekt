@@ -82,7 +82,10 @@ class Simulation implements ISimulatable {
     }
     Draw(ctx: CanvasRenderingContext2D): void {
         //hier wird der Hintergrund gezeichnet
-       ctx.fillStyle ='black'
+        var hintergrundfarbe
+
+        hintergrundfarbe = getOption()
+       ctx.fillStyle = 'yellow'
        ctx.fillRect(0,0,this.breite, this.hoehe)
        ctx.moveTo(50, 100);
        
@@ -141,3 +144,8 @@ if (button != null){
 }
 
 //hier wird die Anwendung ausgeführt
+function getOption() {
+    var selectElement = document.querySelector('#select1')  as HTMLSelectElement;
+    const hintergrundfarbe = selectElement.options[selectElement.selectedIndex].value;
+    return hintergrundfarbe
+}
