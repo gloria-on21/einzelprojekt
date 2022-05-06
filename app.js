@@ -86,18 +86,21 @@ class Simulation {
         this.particles.forEach(p => p.Draw(ctx));
     }
 }
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
+let interval;
 function main() {
     var rangeslider = document.getElementById("sliderRange");
     const value = parseInt(rangeslider.value) * 10;
     const breite = 600 + value;
     const hoehe = 600;
-    const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (!ctx)
         return;
     if (!canvas)
         return;
-    document.body.appendChild(canvas);
+    if (interval)
+        clearInterval(interval);
     canvas.width = breite;
     canvas.height = hoehe;
     canvas.style.position = 'absolute';
@@ -106,7 +109,7 @@ function main() {
     const sim = new Simulation(breite, hoehe);
     //Hier legen wir die Framerate fest mit der die Animtion sich neuladet
     const updateFrameRate = 60;
-    setInterval(() => {
+    interval = setInterval(() => {
         sim.Update();
         sim.Draw(ctx);
     }, 1000 / updateFrameRate);
@@ -115,8 +118,7 @@ function main() {
 const button = document.getElementById("btn1");
 //TODO: wieso geht das nicht
 if (button != null) {
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    4;
     button.onclick = main;
 }
 //Hier werden die ausgewähltem Farben ausgelesen uns zurückgegeben

@@ -99,48 +99,34 @@ class Simulation implements ISimulatable {
     }
 
 }
-
-
-function main(){
-
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
+let interval:any;
+function main() {
     var rangeslider = document.getElementById("sliderRange") as HTMLSelectElement;
- 
-    const value = parseInt(rangeslider.value)*10
-    const breite = 600 + value
-    const hoehe = 600
+    const value = parseInt(rangeslider.value) * 10;
+    const breite = 600 + value;
+    const hoehe = 600;
+    const ctx = canvas.getContext('2d');
+    if (!ctx)
+        return;
+    if (!canvas)
+        return;
+    if (interval)
+      clearInterval(interval);
 
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    
-
-
-    
-    
-    if(!canvas) return
-    
-    document.body.appendChild(canvas)
-    canvas.width = breite
-    canvas.height = hoehe
+    canvas.width = breite;
+    canvas.height = hoehe;
     canvas.style.position = 'absolute';
     canvas.style.top = "100px";
     canvas.style.left = "300px";
-
- const sim = new Simulation(breite, hoehe)
-
-//Hier legen wir die Framerate fest mit der die Animtion sich neuladet
-const updateFrameRate = 60 
-setInterval(
-    ()=> {
-
-    sim.Update()
-    sim.Draw(ctx)
-
-
-    },
-    1000 / updateFrameRate
-)
+    const sim = new Simulation(breite, hoehe);
+    //Hier legen wir die Framerate fest mit der die Animtion sich neuladet
+    const updateFrameRate = 60;
+    interval = setInterval(() => {
+        sim.Update();
+        sim.Draw(ctx);
+    }, 1000 / updateFrameRate);
 }
 
 //Hier wird ein neues Bild generiert
@@ -149,9 +135,7 @@ const button = document.getElementById("btn1")
 
 //TODO: wieso geht das nicht
 if (button != null){
-
-    const ctx = canvas.getContext('2d')
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+4
     button.onclick = main;
 }
 
