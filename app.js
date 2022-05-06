@@ -77,7 +77,7 @@ class Simulation {
     }
     Draw(ctx) {
         //hier wird der Hintergrund gezeichnet
-        var hintergrundfarbe;
+        let hintergrundfarbe;
         hintergrundfarbe = getOption();
         ctx.fillStyle = hintergrundfarbe;
         ctx.fillRect(0, 0, this.breite, this.hoehe);
@@ -92,6 +92,9 @@ function main() {
     const breite = 600 + value;
     const hoehe = 600;
     const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx)
+        return;
     if (!canvas)
         return;
     document.body.appendChild(canvas);
@@ -100,9 +103,6 @@ function main() {
     canvas.style.position = 'absolute';
     canvas.style.top = "100px";
     canvas.style.left = "300px";
-    const ctx = canvas.getContext('2d');
-    if (!ctx)
-        return;
     const sim = new Simulation(breite, hoehe);
     //Hier legen wir die Framerate fest mit der die Animtion sich neuladet
     const updateFrameRate = 60;
@@ -112,9 +112,11 @@ function main() {
     }, 1000 / updateFrameRate);
 }
 //Hier wird ein neues Bild generiert
-//TODO: wieso geht das nicht
 const button = document.getElementById("btn1");
+//TODO: wieso geht das nicht
 if (button != null) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     button.onclick = main;
 }
 //Hier werden die ausgewähltem Farben ausgelesen uns zurückgegeben
