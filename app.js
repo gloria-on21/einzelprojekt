@@ -52,15 +52,18 @@ class Particle {
     }
 }
 const ParticleCount = 100;
-const ColorPalette = [
-    ["#FFDFA1", "#E8B6A0", "#FFB5C7", "#D099E8", "#A8AAFF"]
-];
 class Simulation {
     constructor(breite, hoehe) {
         this.breite = breite;
         this.hoehe = hoehe;
         //Array in dem wir unsere Partikel speichern
         this.particles = [];
+        const farbe1 = getOptionErsteFarbe();
+        const farbe2 = getOptionZweiteFarbe();
+        const farbe3 = getOptionDritteFarbe();
+        const farbe4 = getOptionVierteFarbe();
+        const farbe5 = getOptionFuenfteFarbe();
+        const ColorPalette = [[farbe1, farbe2, farbe3, farbe4, farbe5]];
         const k = GetRandomInt(0, ColorPalette.length);
         const pal = ColorPalette;
         for (var i = 0; i < ParticleCount; i++) {
@@ -108,13 +111,38 @@ function main() {
 }
 //Hier wird ein neues Bild generiert
 //TODO: wieso geht das nicht
-var button = document.getElementById("btn1");
+const button = document.getElementById("btn1");
 if (button != null) {
     button.onclick = main;
 }
-//hier wird die Anwendung ausgeführt
+//Hier werden die ausgewähltem Farben ausgelesen uns zurückgegeben
 function getOption() {
-    var selectElement = document.querySelector('#hintergrundsfarbe');
+    const selectElement = document.querySelector('#hintergrundsfarbe');
     const hintergrundfarbe = selectElement.options[selectElement.selectedIndex].value;
     return hintergrundfarbe;
+}
+function getOptionErsteFarbe() {
+    const selectElement = document.querySelector('#farbe1');
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe;
+}
+function getOptionZweiteFarbe() {
+    const selectElement = document.querySelector('#farbe2');
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe;
+}
+function getOptionDritteFarbe() {
+    const selectElement = document.querySelector('#farbe3');
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe;
+}
+function getOptionVierteFarbe() {
+    const selectElement = document.querySelector('#farbe4');
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe;
+}
+function getOptionFuenfteFarbe() {
+    const selectElement = document.querySelector('#farbe5');
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe;
 }

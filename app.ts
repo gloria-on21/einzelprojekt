@@ -57,18 +57,19 @@ class Particle implements ISimulatable {
 
 }
 const ParticleCount = 100
-const ColorPalette = [
 
-
-    ["#FFDFA1", "#E8B6A0","#FFB5C7", "#D099E8","#A8AAFF"]
-
-
-]
 class Simulation implements ISimulatable {
      //Array in dem wir unsere Partikel speichern
     
     particles: Particle[] = []
     constructor(private breite:number, private hoehe:number){
+
+    const farbe1= getOptionErsteFarbe()
+    const farbe2= getOptionZweiteFarbe()
+    const farbe3= getOptionDritteFarbe()
+    const farbe4= getOptionVierteFarbe()
+    const farbe5= getOptionFuenfteFarbe()
+    const ColorPalette = [[farbe1, farbe2 ,farbe3, farbe4 ,farbe5]]
     const k = GetRandomInt(0,ColorPalette.length)
     const pal = ColorPalette
     for( var i = 0; i< ParticleCount; i++){
@@ -137,15 +138,47 @@ setInterval(
 
 //Hier wird ein neues Bild generiert
 //TODO: wieso geht das nicht
-var button = document.getElementById("btn1")
+const button = document.getElementById("btn1")
 
 if (button != null){
     button.onclick = main;
 }
 
-//hier wird die Anwendung ausgeführt
+//Hier werden die ausgewähltem Farben ausgelesen uns zurückgegeben
  function getOption() {
-    var selectElement = document.querySelector('#hintergrundsfarbe')  as HTMLSelectElement;
+    const selectElement = document.querySelector('#hintergrundsfarbe')  as HTMLSelectElement;
     const hintergrundfarbe = selectElement.options[selectElement.selectedIndex].value;
     return hintergrundfarbe
 } 
+
+function getOptionErsteFarbe(){
+    const selectElement = document.querySelector('#farbe1')  as HTMLSelectElement;
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe
+
+}
+function getOptionZweiteFarbe(){
+    const selectElement = document.querySelector('#farbe2')  as HTMLSelectElement;
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe
+
+}
+function getOptionDritteFarbe(){
+    const selectElement = document.querySelector('#farbe3')  as HTMLSelectElement;
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe
+
+}
+function getOptionVierteFarbe(){
+    const selectElement = document.querySelector('#farbe4')  as HTMLSelectElement;
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe
+
+}
+function getOptionFuenfteFarbe(){
+    const selectElement = document.querySelector('#farbe5')  as HTMLSelectElement;
+    const farbe = selectElement.options[selectElement.selectedIndex].value;
+    return farbe
+
+}
+
