@@ -84,8 +84,8 @@ class Simulation implements ISimulatable {
         //hier wird der Hintergrund gezeichnet
         var hintergrundfarbe
 
-        hintergrundfarbe = getOption()
-       ctx.fillStyle = 'yellow'
+       hintergrundfarbe = getOption();
+       ctx.fillStyle = hintergrundfarbe
        ctx.fillRect(0,0,this.breite, this.hoehe)
        ctx.moveTo(50, 100);
        
@@ -144,8 +144,8 @@ if (button != null){
 }
 
 //hier wird die Anwendung ausgeführt
-function getOption() {
-    var selectElement = document.querySelector('#select1')  as HTMLSelectElement;
+ function getOption() {
+    var selectElement = document.querySelector('#hintergrundsfarbe')  as HTMLSelectElement;
     const hintergrundfarbe = selectElement.options[selectElement.selectedIndex].value;
     return hintergrundfarbe
-}
+} 

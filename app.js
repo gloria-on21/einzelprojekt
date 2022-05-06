@@ -77,7 +77,7 @@ class Simulation {
         //hier wird der Hintergrund gezeichnet
         var hintergrundfarbe;
         hintergrundfarbe = getOption();
-        ctx.fillStyle = 'yellow';
+        ctx.fillStyle = hintergrundfarbe;
         ctx.fillRect(0, 0, this.breite, this.hoehe);
         ctx.moveTo(50, 100);
         //hier wird alles gezeichnet
@@ -115,7 +115,7 @@ if (button != null) {
 }
 //hier wird die Anwendung ausgeführt
 function getOption() {
-    var selectElement = document.querySelector('#select1');
+    var selectElement = document.querySelector('#hintergrundsfarbe');
     const hintergrundfarbe = selectElement.options[selectElement.selectedIndex].value;
     return hintergrundfarbe;
 }
