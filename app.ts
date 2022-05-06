@@ -101,6 +101,7 @@ const breite = 600
 const hoehe = 600
 const canvas = document.createElement('canvas')
 
+
 if(!canvas) return
 
 document.body.appendChild(canvas)
@@ -131,5 +132,12 @@ setInterval(
 )
 }
 
+//Hier wird ein neues Bild generiert
+//TODO: wieso geht das nicht
+var button = document.getElementById("btn1")
+
+if (button != null){
+    button.onclick = main;
+}
+
 //hier wird die Anwendung ausgeführt
-main()

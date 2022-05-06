@@ -105,5 +105,10 @@ function main() {
         sim.Draw(ctx);
     }, 1000 / updateFrameRate);
 }
+//Hier wird ein neues Bild generiert
+//TODO: wieso geht das nicht
+var button = document.getElementById("btn1");
+if (button != null) {
+    button.onclick = main;
+}
 //hier wird die Anwendung ausgeführt
-main();
