@@ -88,7 +88,7 @@ class Simulation implements ISimulatable {
        hintergrundfarbe = getOption();
        ctx.fillStyle = hintergrundfarbe
        ctx.fillRect(0,0,this.breite, this.hoehe)
-       ctx.moveTo(50, 100);
+       ctx.moveTo(100, 100);
        
         
        
@@ -101,24 +101,28 @@ class Simulation implements ISimulatable {
 }
 
 function main(){
-const breite = 600
-const hoehe = 600
-const canvas = document.createElement('canvas')
 
-
-if(!canvas) return
-
-document.body.appendChild(canvas)
-canvas.width = breite
-canvas.height = hoehe
-canvas.style.position = 'absolute';
-canvas.style.top = "100px";
-canvas.style.left = "100px";
-
-
-const ctx = canvas.getContext('2d')
-if (!ctx) return
-
+    var rangeslider = document.getElementById("sliderRange") as HTMLSelectElement;
+ 
+    const value = parseInt(rangeslider.value)*10
+    const breite = 600 + value
+    const hoehe = 600
+    const canvas = document.createElement('canvas')
+    
+    
+    if(!canvas) return
+    
+    document.body.appendChild(canvas)
+    canvas.width = breite
+    canvas.height = hoehe
+    canvas.style.position = 'absolute';
+    canvas.style.top = "100px";
+    canvas.style.left = "300px";
+    
+    
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    
 
  const sim = new Simulation(breite, hoehe)
 

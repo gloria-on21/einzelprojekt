@@ -81,13 +81,15 @@ class Simulation {
         hintergrundfarbe = getOption();
         ctx.fillStyle = hintergrundfarbe;
         ctx.fillRect(0, 0, this.breite, this.hoehe);
-        ctx.moveTo(50, 100);
+        ctx.moveTo(100, 100);
         //hier wird alles gezeichnet
         this.particles.forEach(p => p.Draw(ctx));
     }
 }
 function main() {
-    const breite = 600;
+    var rangeslider = document.getElementById("sliderRange");
+    const value = parseInt(rangeslider.value) * 10;
+    const breite = 600 + value;
     const hoehe = 600;
     const canvas = document.createElement('canvas');
     if (!canvas)
@@ -97,7 +99,7 @@ function main() {
     canvas.height = hoehe;
     canvas.style.position = 'absolute';
     canvas.style.top = "100px";
-    canvas.style.left = "100px";
+    canvas.style.left = "300px";
     const ctx = canvas.getContext('2d');
     if (!ctx)
         return;
