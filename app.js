@@ -52,7 +52,7 @@ class Particle {
     }
 }
 const ParticleCount = 100;
-class Simulation {
+class Ballmuster {
     constructor(breite, hoehe) {
         this.breite = breite;
         this.hoehe = hoehe;
@@ -86,6 +86,38 @@ class Simulation {
         this.particles.forEach(p => p.Draw(ctx));
     }
 }
+class LinienmusterOhneHintergrund {
+    constructor(breite, hoehe) {
+        this.breite = breite;
+        this.hoehe = hoehe;
+        //Array in dem wir unsere Partikel speichern
+        this.particles = [];
+        const farbe1 = getOptionErsteFarbe();
+        const farbe2 = getOptionZweiteFarbe();
+        const farbe3 = getOptionDritteFarbe();
+        const farbe4 = getOptionVierteFarbe();
+        const farbe5 = getOptionFuenfteFarbe();
+        const ColorPalette = [[farbe1, farbe2, farbe3, farbe4, farbe5]];
+        const k = GetRandomInt(0, ColorPalette.length);
+        const pal = ColorPalette;
+        for (var i = 0; i < ParticleCount; i++) {
+            const m = GetRandomInt(0, ColorPalette[0].length);
+            const color = ColorPalette[0][m];
+            this.particles.push(new Particle(breite, hoehe, color));
+        }
+    }
+    Update() {
+        this.particles.forEach(p => p.Update());
+    }
+    Draw(ctx) {
+        //hier wird der Hintergrund gezeichnet
+        ctx.fillStyle = 'transparent';
+        ctx.fillRect(0, 0, this.breite, this.hoehe);
+        ctx.moveTo(100, 100);
+        //hier wird alles gezeichnet
+        this.particles.forEach(p => p.Draw(ctx));
+    }
+}
 const canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
 let interval;
@@ -106,13 +138,25 @@ function main() {
     canvas.style.position = 'absolute';
     canvas.style.top = "100px";
     canvas.style.left = "300px";
-    const sim = new Simulation(breite, hoehe);
-    //Hier legen wir die Framerate fest mit der die Animtion sich neuladet
-    const updateFrameRate = 60;
-    interval = setInterval(() => {
-        sim.Update();
-        sim.Draw(ctx);
-    }, 1000 / updateFrameRate);
+    const muster = getOptionMuster();
+    if (muster == "kreise") {
+        const sim = new Ballmuster(breite, hoehe);
+        //Hier legen wir die Framerate fest mit der die Animtion sich neuladet
+        const updateFrameRate = 60;
+        interval = setInterval(() => {
+            sim.Update();
+            sim.Draw(ctx);
+        }, 1000 / updateFrameRate);
+    }
+    if (muster == "linienOhneHintergrund") {
+        const sim = new LinienmusterOhneHintergrund(breite, hoehe);
+        //Hier legen wir die Framerate fest mit der die Animtion sich neuladet
+        const updateFrameRate = 60;
+        interval = setInterval(() => {
+            sim.Update();
+            sim.Draw(ctx);
+        }, 1000 / updateFrameRate);
+    }
 }
 //Hier wird ein neues Bild generiert
 const button = document.getElementById("btn1");
@@ -120,6 +164,10 @@ const button = document.getElementById("btn1");
 if (button != null) {
     4;
     button.onclick = main;
+}
+const saveButton = document.getElementById("btn2");
+if (saveButton != null) {
+    saveButton.onclick = bildSpeichern;
 }
 //Hier werden die ausgewähltem Farben ausgelesen uns zurückgegeben
 function getOption() {
@@ -151,4 +199,13 @@ function getOptionFuenfteFarbe() {
     const selectElement = document.querySelector('#farbe5');
     const farbe = selectElement.options[selectElement.selectedIndex].value;
     return farbe;
+}
+function bildSpeichern() {
+    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    window.location.href = image;
+}
+function getOptionMuster() {
+    const selectElement = document.querySelector('#muster');
+    const muster = selectElement.options[selectElement.selectedIndex].value;
+    return muster;
 }
