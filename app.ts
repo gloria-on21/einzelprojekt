@@ -58,29 +58,33 @@ class Particle implements ISimulatable {
 }
 
 class Linien implements ISimulatable {
-    x= 0; y= 0
+    x= 0; y= 0; neuesY= 0; neuesX = 0;
 
     constructor(private b: number, private h: number, private color:string){
         this.x = GetRandomFloat(0, b)
         this.y = GetRandomFloat(0, h)
+        this.neuesY = GetRandomFloat(0, h)
+        this.neuesX = GetRandomFloat(0, b)
     }
     Update(): void {
         //hier werden die neuen Positionen berechnet
        
         }
     Draw(ctx: CanvasRenderingContext2D): void {
-        ctx.fillStyle = this.color
+        ctx.strokeStyle = this.color
         ctx.moveTo(0,this.y)
-        ctx.lineTo(this.b,this.y)
+        ctx.lineTo(this.b,this.neuesY)
+        ctx.moveTo(this.x,0)
+        ctx.lineTo(this.neuesX,this.h)
      /*    ctx.moveTo(0, this.y)
         ctx.lineTo(this.x, this.h)
         ctx.moveTo(0, this.y)
         ctx.lineTo(this.x, 0) */
-        ctx.fill()
+        ctx.stroke()
     }
 
 }
-const LinienCount = 200
+const LinienCount = 50
 class Linienmuster implements ISimulatable {
     //Array in dem wir unsere Partikel speichern
    
@@ -95,7 +99,7 @@ class Linienmuster implements ISimulatable {
    const ColorPalette = [[farbe1, farbe2 ,farbe3, farbe4 ,farbe5]]
    const k = GetRandomInt(0,ColorPalette.length)
    const pal = ColorPalette
-   for( var i = 0; i< ParticleCount; i++){
+   for( var i = 0; i< LinienCount; i++){
        const m = GetRandomInt(0,ColorPalette[0].length)
        const color = ColorPalette[0][m]
        this.linien.push(new Linien(breite,hoehe,color))
@@ -245,13 +249,20 @@ function main() {
 
 
     }
-}
 
-//Hier wird ein neues Bild generiert
+    if (muster =="linien"){
+
+        const sim = new Linienmuster(breite, hoehe);
+        //Hier legen wir die Framerate fest mit der die Animation sich neuladet
+        
+        sim.Draw(ctx);
+
+
+    }
+}
 
 const button = document.getElementById("btn1")
 
-//TODO: wieso geht das nicht
 if (button != null){
 4
     button.onclick = main;
