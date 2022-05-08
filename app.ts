@@ -56,8 +56,69 @@ class Particle implements ISimulatable {
 
 
 }
-const ParticleCount = 100
 
+class Linien implements ISimulatable {
+    x= 0; y= 0
+
+    constructor(private b: number, private h: number, private color:string){
+        this.x = GetRandomFloat(0, b)
+        this.y = GetRandomFloat(0, h)
+    }
+    Update(): void {
+        //hier werden die neuen Positionen berechnet
+       
+        }
+    Draw(ctx: CanvasRenderingContext2D): void {
+        ctx.fillStyle = this.color
+        ctx.moveTo(0,this.y)
+        ctx.lineTo(this.b,this.y)
+     /*    ctx.moveTo(0, this.y)
+        ctx.lineTo(this.x, this.h)
+        ctx.moveTo(0, this.y)
+        ctx.lineTo(this.x, 0) */
+        ctx.fill()
+    }
+
+}
+const LinienCount = 200
+class Linienmuster implements ISimulatable {
+    //Array in dem wir unsere Partikel speichern
+   
+   linien: Linien[] = []
+   constructor(private breite:number, private hoehe:number){
+
+   const farbe1= getOptionErsteFarbe()
+   const farbe2= getOptionZweiteFarbe()
+   const farbe3= getOptionDritteFarbe()
+   const farbe4= getOptionVierteFarbe()
+   const farbe5= getOptionFuenfteFarbe()
+   const ColorPalette = [[farbe1, farbe2 ,farbe3, farbe4 ,farbe5]]
+   const k = GetRandomInt(0,ColorPalette.length)
+   const pal = ColorPalette
+   for( var i = 0; i< ParticleCount; i++){
+       const m = GetRandomInt(0,ColorPalette[0].length)
+       const color = ColorPalette[0][m]
+       this.linien.push(new Linien(breite,hoehe,color))
+   }
+    }
+   Update(): void {
+      this.linien.forEach(p => p.Update()) 
+   }
+
+   Draw(ctx: CanvasRenderingContext2D): void {
+       //hier wird der Hintergrund gezeichnet
+       let hintergrundfarbe
+
+      hintergrundfarbe = getOption();
+      ctx.fillStyle = hintergrundfarbe
+      ctx.fillRect(0,0,this.breite, this.hoehe)
+
+      //hier wird alles gezeichnet
+
+      this.linien.forEach(p => p.Draw(ctx))
+   }
+}
+const ParticleCount = 350;
 class Ballmuster implements ISimulatable {
      //Array in dem wir unsere Partikel speichern
     
@@ -89,7 +150,6 @@ class Ballmuster implements ISimulatable {
        hintergrundfarbe = getOption();
        ctx.fillStyle = hintergrundfarbe
        ctx.fillRect(0,0,this.breite, this.hoehe)
-       ctx.moveTo(100, 100);
        
         
        

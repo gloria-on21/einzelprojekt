@@ -51,7 +51,65 @@ class Particle {
         ctx.fill();
     }
 }
-const ParticleCount = 100;
+class Linien {
+    constructor(b, h, color) {
+        this.b = b;
+        this.h = h;
+        this.color = color;
+        this.x = 0;
+        this.y = 0;
+        this.x = GetRandomFloat(0, b);
+        this.y = GetRandomFloat(0, h);
+    }
+    Update() {
+        //hier werden die neuen Positionen berechnet
+    }
+    Draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.moveTo(0, this.y);
+        ctx.lineTo(this.b, this.y);
+        /*    ctx.moveTo(0, this.y)
+           ctx.lineTo(this.x, this.h)
+           ctx.moveTo(0, this.y)
+           ctx.lineTo(this.x, 0) */
+        ctx.fill();
+    }
+}
+const LinienCount = 200;
+class Linienmuster {
+    constructor(breite, hoehe) {
+        this.breite = breite;
+        this.hoehe = hoehe;
+        //Array in dem wir unsere Partikel speichern
+        this.linien = [];
+        const farbe1 = getOptionErsteFarbe();
+        const farbe2 = getOptionZweiteFarbe();
+        const farbe3 = getOptionDritteFarbe();
+        const farbe4 = getOptionVierteFarbe();
+        const farbe5 = getOptionFuenfteFarbe();
+        const ColorPalette = [[farbe1, farbe2, farbe3, farbe4, farbe5]];
+        const k = GetRandomInt(0, ColorPalette.length);
+        const pal = ColorPalette;
+        for (var i = 0; i < ParticleCount; i++) {
+            const m = GetRandomInt(0, ColorPalette[0].length);
+            const color = ColorPalette[0][m];
+            this.linien.push(new Linien(breite, hoehe, color));
+        }
+    }
+    Update() {
+        this.linien.forEach(p => p.Update());
+    }
+    Draw(ctx) {
+        //hier wird der Hintergrund gezeichnet
+        let hintergrundfarbe;
+        hintergrundfarbe = getOption();
+        ctx.fillStyle = hintergrundfarbe;
+        ctx.fillRect(0, 0, this.breite, this.hoehe);
+        //hier wird alles gezeichnet
+        this.linien.forEach(p => p.Draw(ctx));
+    }
+}
+const ParticleCount = 350;
 class Ballmuster {
     constructor(breite, hoehe) {
         this.breite = breite;
@@ -81,7 +139,6 @@ class Ballmuster {
         hintergrundfarbe = getOption();
         ctx.fillStyle = hintergrundfarbe;
         ctx.fillRect(0, 0, this.breite, this.hoehe);
-        ctx.moveTo(100, 100);
         //hier wird alles gezeichnet
         this.particles.forEach(p => p.Draw(ctx));
     }
