@@ -185,10 +185,12 @@ const canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
 let interval;
 function main() {
-    var rangeslider = document.getElementById("sliderRange");
-    const value = parseInt(rangeslider.value) * 10;
-    const breite = 600 + value;
-    const hoehe = 600;
+    var rangeslider1 = document.getElementById("sliderRange1");
+    var rangeslider2 = document.getElementById("sliderRange2");
+    const valueBreite = parseInt(rangeslider1.value) * 10;
+    const valueHoehe = parseInt(rangeslider2.value) * 10;
+    const breite = 600 + valueBreite;
+    const hoehe = 600 + valueHoehe;
     const ctx = canvas.getContext('2d');
     if (!ctx)
         return;
