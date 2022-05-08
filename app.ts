@@ -220,8 +220,8 @@ function main() {
     canvas.width = breite;
     canvas.height = hoehe;
     canvas.style.position = 'absolute';
-    canvas.style.top = "100px";
-    canvas.style.left = "300px";
+    canvas.style.top = "250px";
+    canvas.style.left = "350px";
 
     const muster = getOptionMuster();
     if (muster == "kreise"){
@@ -264,7 +264,7 @@ function main() {
 const button = document.getElementById("btn1")
 
 if (button != null){
-4
+
     button.onclick = main;
 }
 

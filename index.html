@@ -1,7 +1,9 @@
 <html>
-<head></head>
+<head> <link rel="stylesheet" href="app.css">
+  <h1>Generative Art Maker</h1></head>
 <body>
-    <canvas id="canvas">x</canvas>
+    
+  <div id="einstellungen" > 
     <div id="dropdown-background">
         <p> Wähle deine Hintergrundfarbe:</p>
         <div class="custom-select" style="width:200px;">
@@ -21,7 +23,7 @@
               <option class="drop-down-hintergrund" value="#3BB143">green</option>
               <option class="drop-down-hintergrund" value="#98FB98">mint</option>
               <option class="drop-down-hintergrund" value="white">white</option>
-              <option class="drop-down-hintergrund" value="transparent">pig pink</option>
+              <option class="drop-down-hintergrund" value="black">black</option>
             </select>
           </div>
 
@@ -44,7 +46,7 @@
                   <option class="drop-down-hintergrund" value="#3BB143">green</option>
                   <option class="drop-down-hintergrund" value="#98FB98">mint</option>
                   <option class="drop-down-hintergrund" value="white">white</option>
-                  <option class="drop-down-hintergrund" value="transparent">pig pink</option>
+                  <option class="drop-down-hintergrund" value="black">black</option>
                 </select>
               </div>
 
@@ -67,8 +69,7 @@
                       <option class="drop-down-hintergrund" value="#3BB143">green</option>
                       <option class="drop-down-hintergrund" value="#98FB98">mint</option>
                       <option class="drop-down-hintergrund" value="white">white</option>
-                      <option class="drop-down-hintergrund" value="transparent">pig pink</option>
-                    </select>
+                      <option class="drop-down-hintergrund" value="black">black</option>                    </select>
                   </div>
 
                   <div id="dropdown-color3">
@@ -90,8 +91,7 @@
                           <option class="drop-down-hintergrund" value="#3BB143">green</option>
                           <option class="drop-down-hintergrund" value="#98FB98">mint</option>
                           <option class="drop-down-hintergrund" value="white">white</option>
-                          <option class="drop-down-hintergrund" value="transparent">pig pink</option>
-                        </select>
+                          <option class="drop-down-hintergrund" value="black">black</option>                        </select>
                       </div>
 
                       <div id="dropdown-color4">
@@ -113,8 +113,7 @@
                               <option class="drop-down-hintergrund" value="#3BB143">green</option>
                               <option class="drop-down-hintergrund" value="#98FB98">mint</option>
                               <option class="drop-down-hintergrund" value="white">white</option>
-                              <option class="drop-down-hintergrund" value="transparent">pig pink</option>
-                            </select>
+                              <option class="drop-down-hintergrund" value="black">black</option>                            </select>
                           </div>
                           <div id="dropdown-color5">
                             <p> 5. Farbe</p>
@@ -135,24 +134,33 @@
                                   <option class="drop-down-hintergrund" value="#3BB143">green</option>
                                   <option class="drop-down-hintergrund" value="#98FB98">mint</option>
                                   <option class="drop-down-hintergrund" value="white">white</option>
+                                  <option class="drop-down-hintergrund" value="black">black</option>
                                 </select>
                               </div>
-                              <div class="rangeslider">
 
+                              <p> Wähle ein Muster aus!</p>
                                 <div class="custom-select" style="width:200px;">
                                   <select id="muster">
                                     <option class="drop-down-hintergrund" value="linienOhneHintergrund">Linien ohne Hintergrund</option>
                                     <option class="drop-down-hintergrund" value="kreise">Kreise</option>
-                                    <option class="drop-down-hintergrund" value="vierecke">Vierecke</option>
+                                    <option class="drop-down-hintergrund" value="linien">Linien</option>
 
                                   </select>
                                 </div>
+                                <p> Breite:</p>
+                                <div class="rangeslider">
+                                <input type="range" min="1" max="100" value="10"
+                                               class="myslider" id="sliderRange">
+                             
+                              <p> Höhe: </p>
                                 <div class="rangeslider">
                                 <input type="range" min="1" max="100" value="10"
                                                class="myslider" id="sliderRange">
                               </div>
-    <button id="btn1" type="button" value="btn1" > neues Muster </button>
+    <button id="btn1" type="button" value="btn1" > Muster generieren </button>
     <button id="btn2" type="button" value="btn2"> Bild speichern</button>
+
+  </div>
     <script src="app.js"></script>
 </body>
 

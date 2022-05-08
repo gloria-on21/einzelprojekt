@@ -58,24 +58,30 @@ class Linien {
         this.color = color;
         this.x = 0;
         this.y = 0;
+        this.neuesY = 0;
+        this.neuesX = 0;
         this.x = GetRandomFloat(0, b);
         this.y = GetRandomFloat(0, h);
+        this.neuesY = GetRandomFloat(0, h);
+        this.neuesX = GetRandomFloat(0, b);
     }
     Update() {
         //hier werden die neuen Positionen berechnet
     }
     Draw(ctx) {
-        ctx.fillStyle = this.color;
+        ctx.strokeStyle = this.color;
         ctx.moveTo(0, this.y);
-        ctx.lineTo(this.b, this.y);
+        ctx.lineTo(this.b, this.neuesY);
+        ctx.moveTo(this.x, 0);
+        ctx.lineTo(this.neuesX, this.h);
         /*    ctx.moveTo(0, this.y)
            ctx.lineTo(this.x, this.h)
            ctx.moveTo(0, this.y)
            ctx.lineTo(this.x, 0) */
-        ctx.fill();
+        ctx.stroke();
     }
 }
-const LinienCount = 200;
+const LinienCount = 50;
 class Linienmuster {
     constructor(breite, hoehe) {
         this.breite = breite;
@@ -90,7 +96,7 @@ class Linienmuster {
         const ColorPalette = [[farbe1, farbe2, farbe3, farbe4, farbe5]];
         const k = GetRandomInt(0, ColorPalette.length);
         const pal = ColorPalette;
-        for (var i = 0; i < ParticleCount; i++) {
+        for (var i = 0; i < LinienCount; i++) {
             const m = GetRandomInt(0, ColorPalette[0].length);
             const color = ColorPalette[0][m];
             this.linien.push(new Linien(breite, hoehe, color));
@@ -193,8 +199,8 @@ function main() {
     canvas.width = breite;
     canvas.height = hoehe;
     canvas.style.position = 'absolute';
-    canvas.style.top = "100px";
-    canvas.style.left = "300px";
+    canvas.style.top = "250px";
+    canvas.style.left = "350px";
     const muster = getOptionMuster();
     if (muster == "kreise") {
         const sim = new Ballmuster(breite, hoehe);
@@ -214,12 +220,14 @@ function main() {
             sim.Draw(ctx);
         }, 1000 / updateFrameRate);
     }
+    if (muster == "linien") {
+        const sim = new Linienmuster(breite, hoehe);
+        //Hier legen wir die Framerate fest mit der die Animation sich neuladet
+        sim.Draw(ctx);
+    }
 }
-//Hier wird ein neues Bild generiert
 const button = document.getElementById("btn1");
-//TODO: wieso geht das nicht
 if (button != null) {
-    4;
     button.onclick = main;
 }
 const saveButton = document.getElementById("btn2");
