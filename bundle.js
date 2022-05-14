@@ -74,10 +74,6 @@ class Linien {
         ctx.lineTo(this.b, this.neuesY);
         ctx.moveTo(this.x, 0);
         ctx.lineTo(this.neuesX, this.h);
-        /*    ctx.moveTo(0, this.y)
-           ctx.lineTo(this.x, this.h)
-           ctx.moveTo(0, this.y)
-           ctx.lineTo(this.x, 0) */
         ctx.stroke();
     }
 }
@@ -206,7 +202,7 @@ function main() {
     const muster = getOptionMuster();
     if (muster == "kreise") {
         const sim = new Ballmuster(breite, hoehe);
-        //Hier legen wir die Framerate fest mit der die Animtion sich neuladet
+        //Hier legen wir die Framerate fest mit der die Animation sich neuladet
         const updateFrameRate = 60;
         interval = setInterval(() => {
             sim.Update();

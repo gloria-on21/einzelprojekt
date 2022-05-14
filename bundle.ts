@@ -1,10 +1,13 @@
-function GetRandomFloat(min:number, max:number):number{
+ import * as Ballmuster from 'Ballmuster';
+ console.log(Ballmuster);
+
+function GetRandomFloat(min:number, max:number):number{ //Hier werden random Zahlen erzeugt, die die Bewegung der Partikel bestimmen
     return Math.random() * (max - min ) + min
 }
-function GetRandomInt(min:number, max:number):number{
+function GetRandomInt(min:number, max:number):number{ // Hier werden random Zahlen erzeugt, die von 0 bis zur Bildbreite oder Bildhöhe verlaufen
   return Math.floor(GetRandomFloat(min,max))  
 }
-//Hier werdem die Eigenschaften der Simulation festgelegt und die Funktionen definiert
+//Hier werdem die Eigenschaften der Funktionen der Simulation festgelegt
 interface ISimulatable {
     Update(): void
     Draw(ctx: CanvasRenderingContext2D):void
@@ -13,11 +16,11 @@ interface ISimulatable {
 //ermöglicht Partikel im Bild
 
 class Particle implements ISimulatable {
-    x= 0; y= 0
+    x= 0; y= 0 
     dx= 0.1; dy= 0.1; // Geschwindigkeit
-    radius = 10;
+    radius = 10; // Radius von den Bällen
 
-    constructor(private b: number, private h: number, private color:string){
+    constructor(private b: number, private h: number, private color:string){ // In dem Konstruktor werden Koordinaten, der Radius und die Geschwindigkeit der Bewegung übergeben. In den Parameter werden die Höhe, Breite und die Farbe der Partikel übergeben
         this.x = GetRandomFloat(0, b)
         this.y = GetRandomFloat(0, h)
         this.dx = GetRandomFloat(-0.2, 0.2 )
@@ -48,17 +51,17 @@ class Particle implements ISimulatable {
 
         }
     Draw(ctx: CanvasRenderingContext2D): void {
-        ctx.fillStyle = this.color
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.radius, 0.0, 2 * Math.PI)
-        ctx.fill()
+        ctx.fillStyle = this.color //Hier bekommt der canvas seine Farbe 
+        ctx.beginPath() //Hier beginnt die Zeichnung
+        ctx.arc(this.x, this.y, this.radius, 0.0, 2 * Math.PI) //Hier werden die Kreise gezeichnet
+        ctx.fill() //und ausgefüllt
     }
 
 
 }
 
-class Linien implements ISimulatable {
-    x= 0; y= 0; neuesY= 0; neuesX = 0;
+class Linien implements ISimulatable { // In der Linienklasse wird das Linienmuster gezeichnet
+    x= 0; y= 0; neuesY= 0; neuesX = 0; //Hier brauchen wir zwei x und y Koordinaten. Da wir ja möchten, dass die Linien sich schneiden, deswegen ist es wichtig ein neues x und y zu berechnen, damit die Linien nicht parallel verlaufen
 
     constructor(private b: number, private h: number, private color:string){
         this.x = GetRandomFloat(0, b)

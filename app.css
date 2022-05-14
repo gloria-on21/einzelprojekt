@@ -15,9 +15,24 @@ p{
 div#einstellungen{ 
     padding-top: 65px;
     padding-left: 20px;
+    
 
 }
 
 body{
     background-color: rgba(200, 200, 200, 0.5);
+    border-color: white;
+    border-style: solid;
+    border-width: 20px;
+}
+
+button{
+padding-left: 5px;
+padding-bottom: 5px;
+padding-top: 5px;
+
+margin-top: 20px;
+margin-left: 20px;
+margin-bottom: 20px;
+
 }
